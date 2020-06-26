@@ -5,6 +5,7 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { HelloWorldResolver } from "./resolvers/HelloWorldResolver";
 import { ByeResolver } from "./resolvers/ByeResolver";
+import { MovieResolver } from "./resolvers/MovieResolver";
 
 (async () => {
   const app = express();
@@ -16,10 +17,10 @@ import { ByeResolver } from "./resolvers/ByeResolver";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloWorldResolver, ByeResolver],
-      validate: true
+      resolvers: [HelloWorldResolver, ByeResolver, MovieResolver],
+      validate: true,
     }),
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
   });
 
   apolloServer.applyMiddleware({ app, cors: false });
