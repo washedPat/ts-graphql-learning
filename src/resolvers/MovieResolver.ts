@@ -10,7 +10,7 @@ import {
 import { Movie } from "../entity/Movie";
 
 @InputType()
-class MovieInput {
+class MovieOptions {
   @Field(() => String)
   title: String;
 
@@ -30,7 +30,7 @@ class MovieUpdateInput {
 @Resolver()
 export class MovieResolver {
   @Mutation(() => Movie)
-  async createMovie(@Arg("options", () => MovieInput) options: MovieInput) {
+  async createMovie(@Arg("options", () => MovieOptions) options: MovieOptions) {
     const movie = await Movie.create(options).save();
     return movie;
   }
