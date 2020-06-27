@@ -48,4 +48,10 @@ export class MovieResolver {
     await Movie.update({ id }, updatedInput);
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async removeMovie(@Arg("id", () => Int) id: number) {
+    await Movie.delete({ id });
+    return true;
+  }
 }
